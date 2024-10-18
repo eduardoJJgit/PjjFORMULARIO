@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização de Inscritos</title>
+</head>
+<body>
+    <h1>Inscritos</h1>
+    <ul id="inscritos"></ul>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const nome = params.get('nome');
+        const email = params.get('email');
+        const idade = params.get('idade');
+
+        const inscritos = [];
+
+        if (nome && email && idade) {
+            inscritos.push({ nome, email, idade });
+        }
+
+        inscritos.sort((a, b) => a.nome.localeCompare(b.nome));
+
+        const lista = document.getElementById('inscritos');
+        inscritos.forEach(inscrito => {
+            const li = document.createElement('li');
+            li.textContent = `Nome: ${inscrito.nome}, E-mail: ${inscrito.email}, Idade: ${inscrito.idade}`;
+            lista.appendChild(li);
+        });
+    </script>
+</body>
+</html>
